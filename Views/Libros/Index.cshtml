@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BibliotecaAPP.Models.LibroModel>
+
+@{
+    ViewData["Title"] = "Libros";
+}
+
+<h1>@ViewData["Title"]</h1>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Agregar nuevo libro</a>
+    <a asp-action="ExportToPdf" class="btn btn-outline-danger">Exportar a PDF</a>
+    <a asp-action="ExportToExcel" class="btn btn-outline-success">Exportar a Excel</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Autor</th>
+            <th>Editorial</th>
+            <th>ISBN</th>
+            <th>Año</th>
+            <th>Categoría</th>
+            <th>Existencias</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var libro in Model)
+        {
+            <tr>
+                <td>@libro.Titulo</td>
+                <td>@libro.Autor</td>
+                <td>@libro.Editorial</td>
+                <td>@libro.ISBN</td>
+                <td>@libro.Anio</td>
+                <td>@libro.Categoria</td>
+                <td>@libro.Stock</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@libro.Id" class="btn btn-warning">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@libro.Id" class="btn btn-danger">Eliminar</a>
+                    <a asp-action="Details" asp-route-id="@libro.Id" class="btn btn-info">Detalles</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
