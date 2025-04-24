@@ -42,7 +42,7 @@ namespace BibliotecaAPP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(LibroModel libro)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 await _libroService.CreateLibroAsync(libro);
                 return RedirectToAction(nameof(Index));

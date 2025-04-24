@@ -1,7 +1,13 @@
+using BibliotecaAPP.Controllers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<HomeService>();
+builder.Services.AddHttpClient<LibroService>();
+
 
 var app = builder.Build();
 

@@ -6,11 +6,11 @@ namespace BibliotecaAPP.Controllers
     public class HomeService
     {
 
-        private readonly HttpClient _httpC1ient;
+        private readonly HttpClient _httpClient;
         private readonly string _baseUrl;
         public HomeService(IConfiguration configuration, HttpClient httpClient)
         {
-            _httpC1ient = httpClient;
+            _httpClient = httpClient;
             _baseUrl = configuration["ApiSettings:BaseUrl"];
         }
 
@@ -18,7 +18,7 @@ namespace BibliotecaAPP.Controllers
         {
         // Construir la URL con los parametros de consulta
         var url = $"{_baseUrl}/Usuario/validar?correo={Uri.EscapeDataString(credenciales.Correo)}&clave={Uri.EscapeDataString(credenciales.Clave)}";
-        var response = await _httpC1ient.PostAsync(url, null);
+        var response = await _httpClient.PostAsync(url, null);
 
         // Si la respuesta no es exitosa, loguear el mensaje de error
         if (!response.IsSuccessStatusCode)
