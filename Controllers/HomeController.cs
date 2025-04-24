@@ -22,6 +22,7 @@ namespace BibliotecaAPP.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
             //return View();
@@ -37,11 +38,11 @@ namespace BibliotecaAPP.Controllers
             bool esValido = await _usuarioService.ValidarUsuarioAsync(loginViewModel);
             if (esValido)
             {
-                // Aquí puedes redirigir a la página de inicio o a otra página después de un inicio de sesión exitoso
+                TempData["MensajeExito"] = "Inicio de sesión exitoso.";
                 return RedirectToAction("Index", "Libro");
             }
                 ModelState.AddModelError(string.Empty, "Credenciales inválidas.");
-                return View();
+                return View("~/Views/Home/Index.cshtml");
         }
 
         public IActionResult Privacy()

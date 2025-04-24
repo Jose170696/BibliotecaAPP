@@ -1,0 +1,80 @@
+﻿@model BibliotecaAPP.Models.LibroModel
+
+@{
+    ViewData["Title"] = "Detalles del Libro";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-pDmwOTfj3WFL1KAMOVe+Q2vRf8bKeS7/6m2kF1q1DGLu9keZZJgETd82V7pJPq8STmkAEn1kC2K8gX2ViZ4r4w=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3><i class="fas fa-book"></i> Detalles del Libro</h3>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <!-- Título -->
+                        <div class="list-group-item">
+                            <strong><i class="fas fa-book"></i> Título: </strong>
+                            <span>@Model.Titulo</span>
+                        </div>
+
+                        <!-- Autor -->
+                        <div class="list-group-item">
+                            <strong><i class="fas fa-user"></i> Autor: </strong>
+                            <span>@Model.Autor</span>
+                        </div>
+
+                        <!-- Editorial -->
+                        <div class="list-group-item">
+                            <strong><i class="fas fa-building"></i> Editorial: </strong>
+                            <span>@Model.Editorial</span>
+                        </div>
+
+                        <!-- ISBN -->
+                        <div class="list-group-item">
+                            <strong><i class="fas fa-barcode"></i> ISBN: </strong>
+                            <span>@Model.ISBN</span>
+                        </div>
+
+                        <!-- Año -->
+                        <div class="list-group-item">
+                            <strong><i class="fas fa-calendar-alt"></i> Año de Publicación: </strong>
+                            <span>@Model.Anio</span>
+                        </div>
+
+                        <!-- Categoría -->
+                        <div class="list-group-item">
+                            <strong><i class="fas fa-tags"></i> Categoría: </strong>
+                            <span>@Model.Categoria</span>
+                        </div>
+
+                        <!-- Stock -->
+                        <div class="list-group-item">
+                            <strong><i class="fas fa-cogs"></i> Stock: </strong>
+                            <span>@Model.Stock</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-between">
+                        <a href="@Url.Action("Index", "Libro")" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> Volver a la lista
+                        </a>
+                        <a href="@Url.Action("Edit", "Libro", new { id = Model.Id })" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
