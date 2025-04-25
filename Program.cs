@@ -7,6 +7,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient<HomeService>();
 builder.Services.AddHttpClient<LibroService>();
+builder.Services.AddHttpClient<PrestamoService>();
 
 
 var app = builder.Build();
