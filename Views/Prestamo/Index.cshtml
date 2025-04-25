@@ -1,0 +1,71 @@
+﻿@model IEnumerable<BibliotecaAPP.Models.PrestamoModel>
+
+@{
+    ViewData["Title"] = "Prestamos";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0"><i class="fas fa-book"></i> @ViewData["Title"]</h4>
+            <div>
+                <a asp-action="Create" class="btn btn-light me-2"><i class="fas fa-plus"></i> Agregar Nuevo Prestamo</a>
+                <a asp-action="ExportToPdf" class="btn btn-danger me-2"><i class="fas fa-file-pdf"></i> PDF</a>
+                <a asp-action="ExportToExcel" class="btn btn-success"><i class="fas fa-file-excel"></i> Excel</a>
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            @if (TempData["MensajeExito"] != null)
+            {
+                <div class="alert alert-success text-center">
+                    <i class="fas fa-check-circle"></i> @TempData["MensajeExito"]
+                </div>
+            }
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle">
+                    <thead class="table-light text-center">
+                        <tr>
+                            <th>Id Usuario</th>
+                            <th>Id Libro</th>
+                            <th>Fecha Prestamo</th>
+                            <th>Fecha Devolucion Esperada</th>
+                            <th>Fecha Devolucion Real</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var prestamo in Model)
+                        {
+                            <tr>
+                                <td>@prestamo.IdUsuario</td>
+                                <td>@prestamo.IdLibro</td>
+                                <td>@prestamo.FechaPrestamo</td>
+                                <td>@prestamo.FechaDevolucionEsperada</td>
+                                <td>@prestamo.FechaDevolucionReal</td>
+                                <td>@prestamo.Estado</td>
+                                <td class="text-center">
+                                    <a asp-action="Edit" asp-route-id="@prestamo.Id" class="btn btn-sm btn-warning me-1">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@prestamo.Id" class="btn btn-sm btn-danger me-1">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@prestamo.Id" class="btn btn-sm btn-info">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
