@@ -13,10 +13,29 @@ namespace BibliotecaAPP.Controllers
             _libroService = libroService;
         }
 
-        //GET: /Libro
-        public async Task<IActionResult> Index()
+        // GET: /Libro
+        public async Task<IActionResult> Index(string titulo, string autor)
         {
-            var libros = await _libroService.GetAllLibrosAsync();
+            // 1) Trae todos los libros
+            var libros = (await _libroService.GetAllLibrosAsync()).ToList();
+
+            // 2) Aplica filtros si vienen valores
+            if (!string.IsNullOrWhiteSpace(titulo))
+                libros = libros
+                    .Where(l => l.Titulo
+                        .Contains(titulo, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+            if (!string.IsNullOrWhiteSpace(autor))
+                libros = libros
+                    .Where(l => l.Autor
+                        .Contains(autor, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+            // 3) Guarda los filtros para mantenerlos en la vista
+            ViewBag.TituloFilter = titulo;
+            ViewBag.AutorFilter = autor;
+
             return View(libros);
         }
 

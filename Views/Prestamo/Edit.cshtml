@@ -1,6 +1,56 @@
-﻿namespace BibliotecaAPP.Views.Prestamo
-{
-    public class Edit
+﻿@model BibliotecaAPP.Models.PrestamoActualizacionModel
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "Editar Préstamo";
+
+    // Construimos la lista de estados
+    var estados = new List<SelectListItem>
     {
-    }
+        new SelectListItem("Prestado",     "Prestado",     Model.Estado == "Prestado"),
+        new SelectListItem("Devuelto",     "Devuelto",     Model.Estado == "Devuelto"),
+        new SelectListItem("No devuelto",  "No devuelto",  Model.Estado == "No devuelto")
+    };
 }
+<link …bootstrap… />
+<link …font-awesome… />
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-warning text-white">
+            <h4 class="mb-0"><i class="fas fa-edit me-2"></i>Editar Préstamo</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" method="post">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @* Campos ocultos *@
+                <input asp-for="Id" type="hidden" />
+
+                @* … campos de solo lectura … *@
+
+                <div class="mb-3">
+                    <label asp-for="FechaDevolucionReal" class="form-label"></label>
+                    <input asp-for="FechaDevolucionReal" type="date" class="form-control" />
+                    <span asp-validation-for="FechaDevolucionReal" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Estado" class="form-label"></label>
+                    <select asp-for="Estado" asp-items="estados" class="form-select">
+                        <option value="">-- Seleccione Estado --</option>
+                    </select>
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary me-2">
+                    <i class="fas fa-save me-1"></i>Guardar cambios
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-1"></i>Volver
+                </a>
+            </form>
+        </div>
+    </div>
+</div>

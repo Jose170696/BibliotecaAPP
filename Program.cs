@@ -7,7 +7,12 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient<HomeService>();
 builder.Services.AddHttpClient<LibroService>();
-builder.Services.AddHttpClient<PrestamoService>();
+builder.Services.AddHttpClient<PrestamoService>(client =>
+{
+    client.DefaultRequestHeaders.Accept.Clear();
+    client.DefaultRequestHeaders.Accept.Add(
+        new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+}); ;
 
 
 var app = builder.Build();
